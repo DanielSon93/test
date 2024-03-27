@@ -47,10 +47,10 @@ export default function OffsetPagination() {
         {optionsPerPage && optionsPerPage.map((option, idx) => <option key={idx}>{option}</option>)}
       </SelectBox>
       <Grid>
-        {isLoading ? (
-          <div>Loading Items...</div>
-        ) : (
+        {!isLoading && currentItems.length > 0 ? (
           currentItems?.map((item) => <GridItem key={item.id}>{item.title}</GridItem>)
+        ) : (
+          <div>Loading Items...</div>
         )}
       </Grid>
       <Pagination

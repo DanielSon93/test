@@ -1,18 +1,22 @@
-// import InfiniteScroll from "./components/InfiniteScroll/InfiniteScroll";
-// import OffsetPagination from "./components/Pagination/OffsetPagination";
 // import SignUp from "./components/SignUp/SignUp";
 // import UnmountAnimation from "./components/UnmountAnimation/UnmountAnimation";
-import CursorPagination from "./components/Pagination/CursorPagination";
+// import InfiniteScroll from "./components/InfiniteScroll/InfiniteScroll";
+// import OffsetPagination from "./components/Pagination/OffsetPagination";
+// import CursorPagination from "./components/Pagination/CursorPagination";
+import { Provider } from "react-redux";
+import Redux from "./components/Redux/Redux";
+import store from "./components/Redux/store/isDarkMode";
 
 function App() {
   return (
-    <>
-      {/* <InfiniteScroll /> */}
-      {/* <OffsetPagination /> */}
+    <Provider store={store}>
       {/* <SignUp /> */}
       {/* <UnmountAnimation /> */}
-      <CursorPagination />
-    </>
+      {/* <InfiniteScroll /> */}
+      {/* <OffsetPagination /> */}
+      {/* <CursorPagination /> */}
+      <Redux />
+    </Provider>
   );
 }
 
