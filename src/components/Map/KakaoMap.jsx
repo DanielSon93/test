@@ -11,23 +11,29 @@ const Layout = styled.div`
 `;
 
 export default function KakaoMap() {
-  const [maps, setMaps] = useState([]);
+  const maps = [
+    { companyName: "본점", latitude: 37.5950656, longitude: 127.0808576 },
+    { companyName: "지점", latitude: 37.5930656, longitude: 127.0808576 },
+  ];
   const [position, setPosition] = useState({
     latitude: 0,
     longitude: 0,
   });
 
-  useEffect(() => {
-    fetch("/data/map.json")
-      .then((res) => res.json())
-      .then((data) => setMaps(data));
+  console.log(position);
 
+  useEffect(() => {
     // 현재 내 위치 받아오기
     const watchId = navigator.geolocation.watchPosition(
       (position) => {
         setPosition({ latitude: position.coords.latitude, longitude: position.coords.longitude });
       },
-      (error) => console.error(error)
+      (error) => console.error(error),
+      {
+        enableHighAccuracy: true,
+        timeout: 5000,
+        maximumAge: 0,
+      }
     );
 
     return () => {
@@ -39,7 +45,7 @@ export default function KakaoMap() {
     <Layout>
       <Map
         center={{ lat: position.latitude, lng: position.longitude }} // 지도 초기 화면
-        style={{ width: "360px", height: "360px" }} // 지도 스타일링
+        style={{ width: "600px", height: "600px" }} // 지도 스타일링
         level={3} // 지도 확대
       >
         {maps.map((map, idx) => (
@@ -49,7 +55,7 @@ export default function KakaoMap() {
                 lat: map.latitude,
                 lng: map.longitude,
               }}
-              radius={50}
+              radius={100}
               strokeWeight={4} // 선(두께)
               strokeColor={"#ff8f65"} // 선(색)
               strokeOpacity={1} // 선(불투명도 0~1)
@@ -74,8 +80,8 @@ export default function KakaoMap() {
           image={{
             src: "/assets/image/currentMarker.png",
             size: {
-              width: 20,
-              height: 20,
+              width: 35,
+              height: 35,
             },
           }}
         ></MapMarker>
